@@ -33,6 +33,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     NgHttpLoaderModule.forRoot()
   ],
   providers: [],
-  bootstrap: [DialogfirstComponent]
+  bootstrap: [EmployeeComponent]
 })
 export class AppModule { }

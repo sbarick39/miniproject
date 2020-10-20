@@ -9,9 +9,10 @@ import { UpdateEmployeeServices } from '../Services/updateemployee.service';
 import { DeleteEmployeeService } from '../Services/deleteemployee.service';
 import { RouterModule } from '@angular/router';
 import { NgHttpLoaderModule } from 'ng-http-loader';
+import { ConformationModalComponent } from '../popup/conformation_popup/conformationModal.component';
 
 @NgModule({
-  declarations: [EmployeeComponent],
+  declarations: [EmployeeComponent,ConformationModalComponent],
   imports: [
     CommonModule,
     HttpClientModule,

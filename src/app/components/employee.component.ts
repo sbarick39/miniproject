@@ -8,7 +8,10 @@ import { UpdateEmployeeServices } from '../Services/updateemployee.service';
 import errorHandling from '../config/error/errorHandling';
 import {MatTableDataSource} from "@angular/material/table";
 import { element } from 'protractor';
-import {MatPaginator} from "@angular/material/paginator"
+import {MatPaginator} from "@angular/material/paginator";
+
+import { MatDialog } from '@angular/material/dialog';
+import {ConformationModalComponent} from "../popup/conformation_popup/conformationModal.component"
 
 @Component({
   selector: 'ems',
@@ -28,8 +31,9 @@ export class EmployeeComponent implements OnInit {
   constructor(public allEmployee:EmployeeService,
                public addEmployee:AddEmployeeServices,
                public updateEmployee:UpdateEmployeeServices,
-               public deleteEmployee:DeleteEmployeeService) { 
-                 
+               public deleteEmployee:DeleteEmployeeService,
+               public dialog:MatDialog) { 
+               
                }
 
   ngOnInit(): void {
@@ -42,14 +46,15 @@ export class EmployeeComponent implements OnInit {
     
    
     deleteEmp(empId){
-      this.deleteEmployee.DeleteEmployee({"empId":empId}).subscribe((posRes)=>{
-        if (posRes.delete== "success"){
+      this.dialog.open(ConformationModalComponent)
+    //  this.deleteEmployee.DeleteEmployee({"empId":empId}).subscribe((posRes)=>{
+      //  if (posRes.delete== "success"){
        
-          this.records.splice(0,1);
-        this.dataSource=new MatTableDataSource(this.records)
+       //   this.records.splice(0,1);
+       // this.dataSource=new MatTableDataSource(this.records)
       
-        }
-          }) 
+       // }
+        //  }) 
       }
     
      
