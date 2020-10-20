@@ -8,6 +8,7 @@ import { EmployeeService } from '../Services/employee.service';
 import { UpdateEmployeeServices } from '../Services/updateemployee.service';
 import { DeleteEmployeeService } from '../Services/deleteemployee.service';
 import { RouterModule } from '@angular/router';
+import { NgHttpLoaderModule } from 'ng-http-loader';
 
 @NgModule({
   declarations: [EmployeeComponent],
@@ -15,6 +16,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     HttpClientModule,
     MaterialsModule,
+    NgHttpLoaderModule.forRoot(),
     RouterModule.forChild([{path:"",component:EmployeeComponent}])
   ],
   providers:[

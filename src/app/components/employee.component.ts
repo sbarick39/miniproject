@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
 import { AddEmployeeServices } from '../Services/addemployee.service';
 import { DeleteEmployeeService } from '../Services/deleteemployee.service';
@@ -7,6 +7,8 @@ import { UpdateEmployeeServices } from '../Services/updateemployee.service';
 //import errorHandling function
 import errorHandling from '../config/error/errorHandling';
 import {MatTableDataSource} from "@angular/material/table";
+import { element } from 'protractor';
+import {MatPaginator} from "@angular/material/paginator"
 
 @Component({
   selector: 'ems',
@@ -16,7 +18,10 @@ import {MatTableDataSource} from "@angular/material/table";
 export class EmployeeComponent implements OnInit {
   public records:any;
   public obj1:any;
+  @ViewChild(MatPaginator,{static:true})
+  public paginator:MatPaginator;
   public dataSource:MatTableDataSource<any>
+  
   public displayColumns:string[]=["Check","SNO","empId","Name","Age","Salary","Department","DOB","Gender","Languages","Actions"]
 
 
@@ -30,10 +35,30 @@ export class EmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.obj1=this.allEmployee.getEmployees().subscribe((posRes)=>{
       this.records=posRes; 
-      this.dataSource=new MatTableDataSource(this.records)
-    },errorHandling)
-
+      this.dataSource=new MatTableDataSource(this.records);
+       this.dataSource.paginator=this.paginator;
+    },errorHandling);
     }
+    
+   
+    deleteEmp(empId){
+      this.deleteEmployee.DeleteEmployee({"empId":empId}).subscribe((posRes)=>{
+        if (posRes.delete== "success"){
+       
+          this.records.splice(0,1);
+        this.dataSource=new MatTableDataSource(this.records)
+      
+        }
+          }) 
+      }
+    
+     
+
+    
+    eaditEmp(){
+      console.log("eadit soon..")
+    }
+    
     ngOnDestroy(){
       this.obj1.unsubscribe();
     }

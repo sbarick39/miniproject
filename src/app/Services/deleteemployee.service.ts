@@ -8,6 +8,10 @@ import {Observable} from "rxjs";
 export class DeleteEmployeeService{
  constructor(public http:HttpClient){}
  public  DeleteEmployee(data:any):Observable<any>{
- return this.http.delete(BASE_URL+"/delete",data);
+     const options={
+         headers:{},
+         body:data
+     }
+ return this.http.delete(BASE_URL+"/delete",options);
  };
 };
